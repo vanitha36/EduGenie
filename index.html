@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="icon" href="/static/favicon.ico">
+
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGenie - AI Learning Assistant</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+
+        <h1>🎓 EduGenie</h1>
+
+        <p>AI Powered Learning Assistant</p>
+
+    </div>
+
+    <div class="top-buttons">
+
+        <button onclick="darkMode()" title="Dark Mode">
+            🌙
+        </button>
+
+        <button onclick="window.location='/clear'" title="Clear Chat">
+            🗑
+        </button>
+
+    </div>
+
+</header>
+<section class="hero">
+
+    <div class="welcome-card">
+
+    <h2>Welcome to EduGenie</h2>
+
+    <p>
+        Learn smarter with AI. Ask questions, understand concepts,
+        generate quizzes, summarize notes, and receive personalized
+        learning paths—all in one place.
+    </p>
+
+</div>
+
+<div class="suggestion-container">
+
+    <div class="suggestion">💡 Explain Artificial Intelligence</div>
+
+    <div class="suggestion">📚 Create a Python Quiz</div>
+
+    <div class="suggestion">📝 Summarize my notes</div>
+
+    <div class="suggestion">🚀 Learning Roadmap for AI</div>
+
+</div>
+<div class="container">
+
+<form id="chatForm" action="/ask" method="post">
+
+<label>Select Learning Task</label>
+
+<select name="task">
+
+<option>Question Answering</option>
+
+<option>Concept Explanation</option>
+
+<option>Quiz Generation</option>
+
+<option>Summarization</option>
+
+<option>Learning Path</option>
+
+</select>
+
+<label>Your Question</label>
+
+<textarea
+name="question"
+rows="6"
+placeholder="Ask EduGenie anything..."
+required></textarea>
+
+<button id="submitBtn">
+🚀 Ask EduGenie
+</button>
+
+</form>
+
+<div id="loading" class="loading" style="display:none;">
+
+    <div class="loader"></div>
+
+    <span>EduGenie is thinking...</span>
+
+</div>
+
+{% if history %}
+
+<div class="chat-container">
+
+{% for chat in history %}
+
+<!-- User Message -->
+
+<div class="message user">
+
+    <div class="avatar">
+        🧑
+    </div>
+
+    <div class="bubble">
+
+        <span class="task-badge">
+            {{ chat.task }}
+        </span>
+
+        <h4>You</h4>
+
+        <p>{{ chat.question }}</p>
+
+    </div>
+
+</div>
+
+<!-- AI Message -->
+
+<div class="message bot">
+
+    <div class="avatar">
+        🤖
+    </div>
+
+    <div class="bubble">
+
+        <h4>EduGenie</h4>
+
+        <div class="ai-answer">
+
+<pre id="answer">{{ chat.answer }}</pre>
+
+</div>
+
+        <div class="buttons">
+
+            <button onclick="copyAnswer()">
+                📋 Copy
+            </button>
+
+            <button onclick="downloadNotes()">
+                ⬇ Download
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+<footer class="footer">
+
+    <h3>🚀 Ask EduGenie</h3>
+
+    <p class="footer-text">
+        Built with ❤️ using FastAPI + Google Gemini API
+    </p>
+
+    <p class="footer-author">
+        Developed by <strong>Bora Prem Sai</strong>
+    </p>
+
+</footer>
+
+<script>
+
+const form=document.getElementById("chatForm");
+
+form.addEventListener("submit",function(){
+
+document.getElementById("loading").style.display="block";
+
+const btn=document.getElementById("submitBtn");
+
+btn.innerHTML="🤖 Thinking...";
+
+btn.disabled=true;
+
+});
+
+function darkMode(){
+
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+        localStorage.setItem("theme","dark");
+    }else{
+        localStorage.setItem("theme","light");
+    }
+
+}
+
+
+
+function copyAnswer(){
+
+const answer=document.getElementById("answer");
+
+if(answer){
+
+navigator.clipboard.writeText(answer.innerText);
+
+alert("Copied Successfully");
+
+}
+
+}
+
+function downloadNotes(){
+
+const answer=document.getElementById("answer");
+
+if(answer){
+
+const blob=new Blob([answer.innerText],{type:"text/plain"});
+
+const a=document.createElement("a");
+
+a.href=URL.createObjectURL(blob);
+
+a.download="EduGenie_Notes.txt";
+
+a.click();
+
+}
+
+}
+window.onload = function(){
+
+    const theme = localStorage.getItem("theme");
+
+    if(theme === "dark"){
+        document.body.classList.add("dark");
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

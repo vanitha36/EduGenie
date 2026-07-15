@@ -1,0 +1,1186 @@
+/* ================================================= */
+/* PART 1 - Professional AI Layout */
+/* ================================================= */
+
+body{
+    margin:0;
+    padding:0;
+    background:#f5f7fb;
+    font-family:'Segoe UI',Arial,sans-serif;
+    color:#222;
+    transition:.3s;
+}
+
+.header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 45px;
+
+    background:white;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+
+}
+
+.logo h1{
+
+    margin:0;
+
+    font-size:34px;
+
+    color:#2563eb;
+
+}
+
+.logo p{
+
+    margin-top:6px;
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+.top-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.top-buttons button{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.top-buttons button:hover{
+
+    transform:scale(1.08);
+
+    background:#1d4ed8;
+
+}
+
+.hero{
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:60px auto;
+
+    text-align:center;
+
+}
+
+.hero h2{
+
+    font-size:52px;
+
+    color:#2563eb;
+
+    margin-bottom:20px;
+
+}
+
+.hero p{
+
+    max-width:850px;
+
+    margin:auto;
+
+    color:#666;
+
+    font-size:20px;
+
+    line-height:1.8;
+
+}
+
+.hero-features{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-top:50px;
+
+}
+
+.hero-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:.35s;
+
+}
+
+.hero-card:hover{
+
+    transform:translateY(-10px);
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.container{
+
+    width:92%;
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:0 12px 40px rgba(0,0,0,.08);
+
+}
+
+@media(max-width:768px){
+
+.header{
+
+    flex-direction:column;
+
+    gap:15px;
+
+    padding:20px;
+
+}
+
+.hero h2{
+
+    font-size:36px;
+
+}
+
+.hero p{
+
+    font-size:17px;
+
+}
+
+.hero-features{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+/* ================================================= */
+/* PART 2 - AI Chat Interface */
+/* ================================================= */
+
+/* Chat Form */
+
+#chatForm{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* Labels */
+
+label{
+    font-size:18px;
+    font-weight:600;
+    color:#2563eb;
+}
+
+/* Dropdown */
+
+select{
+    width:100%;
+    padding:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    background:#fff;
+    font-size:16px;
+    transition:.3s;
+}
+
+select:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 15px rgba(37,99,235,.20);
+}
+
+/* Textarea */
+
+textarea{
+    width:100%;
+    min-height:180px;
+    padding:18px;
+    border-radius:15px;
+    border:1px solid #ddd;
+    font-size:16px;
+    resize:none;
+    line-height:1.8;
+    transition:.3s;
+}
+
+textarea:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 20px rgba(37,99,235,.25);
+}
+
+/* Ask Button */
+
+#submitBtn{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:15px;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:white;
+    font-size:18px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#submitBtn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(37,99,235,.35);
+}
+
+/* Chat History */
+
+.chat-container{
+    margin-top:45px;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+}
+
+/* Message */
+
+.message{
+    display:flex;
+    align-items:flex-start;
+    gap:15px;
+}
+
+/* User Message */
+
+.user{
+    flex-direction:row-reverse;
+}
+
+/* Avatar */
+
+.avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+    flex-shrink:0;
+    color:white;
+}
+
+.user .avatar{
+    background:#2563eb;
+}
+
+.bot .avatar{
+    background:#16a34a;
+}
+
+/* Chat Bubble */
+
+.bubble{
+    flex:1;
+    background:#ffffff;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.user .bubble{
+    background:#2563eb;
+    color:white;
+}
+
+.bot .bubble{
+    background:#f8fafc;
+}
+
+.bubble:hover{
+    transform:translateY(-3px);
+}
+
+.bubble h4{
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+/* Answer */
+
+pre{
+    white-space:pre-wrap;
+    font-size:16px;
+    line-height:1.8;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* Buttons */
+
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+    flex-wrap:wrap;
+}
+
+.buttons button{
+    width:auto;
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.buttons button:hover{
+    background:#1d4ed8;
+}
+
+/* Loading */
+
+.loading{
+    display:none;
+    text-align:center;
+    margin-top:25px;
+    font-size:18px;
+    color:#2563eb;
+}
+
+/* Dark Mode */
+
+body.dark{
+    background:#111827;
+    color:white;
+}
+
+body.dark .container{
+    background:#1f2937;
+}
+
+body.dark label{
+    color:#93c5fd;
+}
+
+body.dark textarea,
+body.dark select{
+    background:#374151;
+    color:white;
+    border:1px solid #4b5563;
+}
+
+body.dark .bubble{
+    background:#374151;
+    color:white;
+}
+
+body.dark .user .bubble{
+    background:#2563eb;
+}
+
+body.dark pre{
+    color:white;
+}
+
+body.dark .buttons button{
+    background:#2563eb;
+}
+
+body.dark .buttons button:hover{
+    background:#1d4ed8;
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.container{
+    width:95%;
+    padding:20px;
+}
+
+.message{
+    flex-direction:column;
+}
+
+.user{
+    flex-direction:column;
+}
+
+.avatar{
+    margin-bottom:10px;
+}
+
+.buttons{
+    flex-direction:column;
+}
+
+.buttons button{
+    width:100%;
+}
+
+}
+/* ================================================= */
+/* PART 3 - Premium AI Experience */
+/* ================================================= */
+
+/* Smooth page animation */
+
+body{
+    animation:pageFade .6s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Hero Cards Animation */
+
+.hero-card{
+    animation:cardFade .8s ease;
+}
+
+@keyframes cardFade{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Better Hero Card */
+
+.hero-card{
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(90deg,
+    transparent,
+    rgba(255,255,255,.4),
+    transparent);
+
+    transition:.7s;
+
+}
+
+.hero-card:hover::before{
+
+    left:100%;
+
+}
+
+/* Container */
+
+.container{
+
+    transition:.35s;
+
+}
+
+.container:hover{
+
+    box-shadow:0 20px 60px rgba(0,0,0,.12);
+
+}
+
+/* Chat Bubble Animation */
+
+.message{
+
+    animation:messageFade .5s ease;
+
+}
+
+@keyframes messageFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Avatar */
+
+.avatar{
+
+    transition:.3s;
+
+}
+
+.avatar:hover{
+
+    transform:rotate(10deg) scale(1.08);
+
+}
+
+/* Bubble */
+
+.bubble{
+
+    transition:.35s;
+
+}
+
+.bubble:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+/* Submit Button */
+
+#submitBtn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+#submitBtn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transition:.8s;
+
+}
+
+#submitBtn:hover::before{
+
+    left:100%;
+
+}
+
+/* Copy Buttons */
+
+.buttons button{
+
+    transition:.3s;
+
+}
+
+.buttons button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+/* Loading Spinner */
+
+.loading{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:20px;
+
+    font-weight:bold;
+
+}
+
+.loader{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:4px solid #ddd;
+
+    border-top:4px solid #2563eb;
+
+    animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f1f5f9;
+
+}
+
+/* Footer */
+
+footer{
+
+    margin-top:70px;
+
+    padding:35px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    text-align:center;
+
+}
+
+footer p{
+
+    margin:8px;
+
+}
+
+/* Premium Dark Mode */
+
+body.dark .hero-card{
+
+    background:#1f2937;
+
+}
+
+body.dark .hero-card:hover{
+
+    background:#2563eb;
+
+}
+
+body.dark .container{
+
+    background:#1f2937;
+
+}
+
+body.dark .loading{
+
+    color:white;
+
+}
+
+body.dark ::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+/* ================================================= */
+/* PART 4 - AI Assistant Experience */
+/* ================================================= */
+
+/* AI Prompt Suggestions */
+
+.suggestion-container{
+    width:92%;
+    max-width:900px;
+    margin:20px auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+}
+
+.suggestion{
+    background:#ffffff;
+    padding:14px 22px;
+    border-radius:30px;
+    border:1px solid #e5e7eb;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    font-weight:500;
+}
+
+.suggestion:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateY(-3px);
+}
+
+/* Welcome Card */
+
+.welcome-card{
+
+    width:92%;
+
+    max-width:900px;
+
+    margin:40px auto;
+
+    text-align:center;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+}
+
+.welcome-card h2{
+
+    color:#2563eb;
+
+    font-size:40px;
+
+    margin-bottom:15px;
+
+}
+
+.welcome-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+/* Chat Animation */
+
+.chat-container{
+
+    animation:fadeChat .6s ease;
+
+}
+
+@keyframes fadeChat{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* Floating Buttons */
+
+.top-buttons{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    z-index:999;
+
+}
+
+.top-buttons button{
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    font-size:22px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+}
+
+/* Better Input */
+
+textarea{
+
+    background:#fafafa;
+
+}
+
+textarea::placeholder{
+
+    color:#999;
+
+}
+
+/* Better Select */
+
+select{
+
+    background:#fafafa;
+
+}
+
+/* Answer Block */
+
+pre{
+
+    background:#f8fafc;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    border-left:5px solid #2563eb;
+
+}
+
+/* Better Footer */
+
+footer{
+
+    font-size:15px;
+
+    letter-spacing:.4px;
+
+}
+
+/* Dark Mode */
+
+body.dark .welcome-card{
+
+    background:#1f2937;
+
+}
+
+body.dark .welcome-card p{
+
+    color:#d1d5db;
+
+}
+
+body.dark .suggestion{
+
+    background:#1f2937;
+
+    color:white;
+
+    border:1px solid #374151;
+
+}
+
+body.dark .suggestion:hover{
+
+    background:#2563eb;
+
+}
+
+body.dark pre{
+
+    background:#111827;
+
+    border-left:5px solid #3b82f6;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.welcome-card{
+
+padding:25px;
+
+}
+
+.welcome-card h2{
+
+font-size:30px;
+
+}
+
+.top-buttons{
+
+right:15px;
+
+bottom:15px;
+
+}
+
+}
+/* ========================= */
+/* Professional Footer */
+/* ========================= */
+
+.footer{
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    text-align:center;
+    padding:40px 20px;
+    margin-top:60px;
+}
+
+.footer h3{
+    color:#ffffff;
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:20px;
+    letter-spacing:.5px;
+}
+
+.footer-text{
+    color:#f8fafc;
+    font-size:18px;
+    font-weight:500;
+    opacity:1;
+    margin:10px 0;
+}
+
+.footer-author{
+    color:#ffffff;
+    font-size:20px;
+    font-weight:600;
+    margin-top:15px;
+}
+
+.footer-author strong{
+    color:#ffffff;
+    font-weight:700;
+}
+body.dark .footer{
+    background:linear-gradient(135deg,#1e3a8a,#172554);
+}
+
+body.dark .footer-text{
+    color:#f1f5f9;
+}
+
+body.dark .footer-author{
+    color:#ffffff;
+}
+/* ===================================== */
+/* Task Badge */
+/* ===================================== */
+
+.task-badge{
+
+    display:inline-block;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    margin-bottom:12px;
+
+}
+/* ================= AI Answer ================= */
+
+.ai-answer{
+
+    background:#f8fafc;
+
+    border-left:5px solid #2563eb;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    margin-top:12px;
+
+    white-space:pre-wrap;
+
+    line-height:1.8;
+
+    font-size:16px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+}
+
+.dark .ai-answer{
+
+    background:#202124;
+
+    color:white;
+
+}
+pre{
+
+    font-family:Segoe UI;
+
+    white-space:pre-wrap;
+
+    word-wrap:break-word;
+
+    line-height:1.8;
+
+}
+.message.user .bubble{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+.dark .message.bot .bubble{
+
+    background:#1f2937;
+
+    color:white;
+
+}
